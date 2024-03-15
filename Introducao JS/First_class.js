@@ -26,8 +26,38 @@ console.log(typeof b);
 //console.log(typeof soma);
 //não se pode mudar os valores pois a variavel soma esta como constante(const), para mudar tem q trocar para let
 
+
 function hof(operation, writer, op1, op2){
     writer(operation(op1, op2));
 }
 
-hof(sub, console.log, 1, 1);
+hof(sub, console.log, 1, 2);
+
+//higher order function
+function maiorQue(writer){
+    let num = (Math.random() * 100).toFixed();
+    console.log("Random: " + num);
+
+    return function(valor){
+        return valor > num
+    };
+}
+
+// console.log(maiorQue()(50));
+
+//Usando uma variavel intermediaria
+const funcRef = maiorQue(console.log);
+console.log(funcRef(50));
+
+// function MenorQue(writer){
+//     let num = (Math.random() * 100).toFixed();
+//     console.log("Random: " + num);
+
+//     return function(valor){
+//         return valor < num
+//     };
+// }
+
+// const funcRef2 = maiorQue(console.log);
+// console.log(funcRef2(30));
+
