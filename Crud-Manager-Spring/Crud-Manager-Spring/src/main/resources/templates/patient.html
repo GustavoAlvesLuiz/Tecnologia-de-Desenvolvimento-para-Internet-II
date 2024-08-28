@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="cabecalho :: head"></div>
+	
+	<title>Crud Manager - Pacientes</title>
+</head>
+<body>
+	<div th:replace="menu :: header"></div>
+	<div class="container my-2">
+		<h1>Pacientes</h1>
+		<div>				
+			<a th:href="@{patients/form}"
+			   class="btn btn-primary btn-sm mb-3 float-right">
+	   			Adicionar Paciente
+       		</a>
+		</div>
+		<table class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+					<th>Telefone</th>
+					<th>Email</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="paciente : ${pacientes}">
+					<td th:text="${paciente.nome}" ></td>
+					<td th:text="${paciente.getDataNascimento()}"></td>
+					<td th:text="${paciente.getTelefone()}"></td>
+					<td th:text="${paciente.getEmail()}"></td>
+					<td>
+						<a th:href="@{/patients/update/{id}(id = ${paciente.id})}"
+						   class="btn btn-primary">
+							Alterar
+						</a>
+						
+						<a th:href="@{/patients/delete/{id}(id = ${paciente.id})}"
+						   class="btn btn-danger">
+							Excluir
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

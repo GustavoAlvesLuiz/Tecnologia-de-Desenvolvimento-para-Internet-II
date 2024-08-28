@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Form Paciente</title>
+</head>
+
+<body>
+	<div class="container my-2">
+		<h2>Paciente</h2>
+		
+		<form th:action="@{/patients/register}" 
+		      method="POST"
+		      th:object="${paciente}" 
+		      action="#">
+			
+			<input type="hidden" id="id" th:field="*{id}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('nome')}"
+				  th:errors="*{nome}">
+			</span>
+			<input type="text" placeholder="Nome" 
+			       class="form-control mb-4 col-4"
+			       th:field="*{nome}"> 
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('dataNascimento')}"
+				  th:errors="*{dataNascimento}">
+			</span>
+			<input type="text" placeholder="Data de Nascimento" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{dataNascimento}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('telefone')}"
+				  th:errors="*{telefone}">
+			</span>
+			<input type="text" placeholder="Telefone" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{telefone}">
+				   
+			 <span class="text-danger"
+				   th:if="${#fields.hasErrors('email')}"
+				   th:errors="*{email}">
+			</span>
+			<input type="text" placeholder="Email" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{email}">
+				   
+			<button type="submit" 
+			        class="btn btn-info col-2">Salvar</button>
+			
+		</form>
+		
+		<hr>
+		
+		<a th:href="@{/patients}"> Pacientes </a>
+	</div>
+</body>
+</html>

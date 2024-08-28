@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Form Consulta</title>
+</head>
+<body>
+	<div class="container my-2">
+		<h2>Consulta</h2>
+		
+		<form th:action="@{/queries/register}" 
+		      method="POST"
+		      th:object="${consulta}" 
+		      action="#">
+			
+			<input type="hidden" id="id" th:field="*{id}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('dataConsulta')}"
+				  th:errors="*{dataConsulta}">
+			</span>
+			<input type="text" placeholder="Data" 
+			       class="form-control mb-4 col-4"
+			       th:field="*{dataConsulta}"> 
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('motivo')}"
+				  th:errors="*{motivo}">
+			</span>
+			<input type="text" placeholder="Motivo" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{motivo}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('diagnostico')}"
+				  th:errors="*{diagnostico}">
+			</span>
+			<input type="text" placeholder="Diagnostico" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{diagnostico}">
+				   
+			<!-- Id do paciente -->
+			<div class="form-group mb-4">
+                    <label for="paciente">Paciente</label>
+                    <select id="paciente" name="paciente" class="form-control" th:field="*{paciente}">
+                        <option value="" disabled selected>Selecione um Paciente</option>
+                        <option th:each="paciente : ${pacientes}" 
+                                th:value="${paciente.id}" 
+                                th:text="${paciente.nome}">
+                        </option>
+                    </select>
+                    <span class="text-danger" th:if="${#fields.hasErrors('paciente')}" th:errors="{paciente}"></span>
+                </div>
+			
+			<button type="submit" 
+			        class="btn btn-info col-2">Salvar</button>
+			
+		</form>
+		
+		<hr>
+		
+		<a th:href="@{/queries}"> Consultas </a>
+	</div>
+</body>
+</body>
+</html>
